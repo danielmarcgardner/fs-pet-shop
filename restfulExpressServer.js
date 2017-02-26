@@ -32,9 +32,11 @@ const auth =  (req, res, next) => {
   };
 };
 
-// Please note for the bonus I added an auth to complete the bonus for the function below.
-// Remove auth so that this passes the initial test.
-app.get('/pets', auth, (req, res) => {
+app.use(auth, (req, res, next) => {
+  next()
+})
+
+app.get('/pets', (req, res) => {
   fs.readFile(petsPath, 'utf8', (err, data) => {
     if (err) {
       console.error(err.stack);
