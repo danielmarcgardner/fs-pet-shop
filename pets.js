@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const petsPath = path.join('./', 'pets.json');
+const petsPath = path.join(__dirname, 'pets.json');
 const node = path.basename(process.argv[0]);
 const file = path.basename(process.argv[1]);
 const cmd = process.argv[2];

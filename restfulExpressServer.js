@@ -5,7 +5,7 @@ const path = require('path');
 const petsPath = path.join('./pets.json');
 const express = require('express');
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
 const morgan = require('morgan')
 app.use(bodyParser.json());
@@ -32,9 +32,7 @@ const auth =  (req, res, next) => {
   };
 };
 
-app.use(auth, (req, res, next) => {
-  next()
-})
+app.use(auth)
 
 app.get('/pets', (req, res) => {
   fs.readFile(petsPath, 'utf8', (err, data) => {
@@ -48,6 +46,7 @@ app.get('/pets', (req, res) => {
 });
 
 app.get('/pets/:id', (req, res) => {
+  let id = Number(req.params.id);
   fs.readFile(petsPath, 'utf8', (err, data) => {
     if (err) {
       console.error(err.stack);

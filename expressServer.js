@@ -5,7 +5,7 @@ const path = require('path');
 const petsPath = path.join('./pets.json');
 const express = require('express');
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
